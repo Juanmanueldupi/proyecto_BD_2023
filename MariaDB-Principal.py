@@ -17,14 +17,14 @@ while opcion != 0:
         nuevo["NumAsociado"]=input("Introduce el numero de Asociado:")
         nuevo["NumCorrelativo_Pais"]=input("Introduce el codigo de tu Pais():")
         nuevo["Nombre"]=input("Introduce el Nombre")
-        nuevo["Telefono"]=(input("Introduce el Telefono:"))
+        nuevo["Telefono"]=input("Introduce el Telefono:")
         nuevo["Direccion"]=input("Introduce la Direccion:")
         NuevoParticipante(db,nuevo)
     elif opcion == 5:
         borrar = input("Introduce el nombre de un pais: ")
         BorrarInformacion(db,borrar)
     elif opcion == 6:
-        actualizar = float(input(""))
+        actualizar = input("Introduce un numero de asociado: ")
         ActualizarInformacion(db,actualizar)
 
     
