@@ -5,28 +5,40 @@ db = Conexion_BD("localhost","juanmad","juanmad","Python3")
 opcion=MostrarMenu()
 while opcion != 0:
     if opcion == 1:
-        Listar(db)
+        Listar_Pais(db)
+        print()
     elif opcion == 2:
-        fecha = input("Introduce una fecha por pantalla: ")
-        Buscar(db,fecha)
+        Listar_Alojamiento(db)
     elif opcion == 3:
+        Listar(db)    
+        print()
+    elif opcion == 4:
+        fecha = input("Introduce una fecha por pantalla(aaaa-mm-dd): ")
+        Buscar(db,fecha)
+        print()
+    elif opcion == 5:
         PaisOrigen= input("Introduce el nombre de tu pais de origen: ")
         BuscarRelacionada(db,PaisOrigen)
-    elif opcion == 4:
+        print()
+    elif opcion == 6:
         nuevo={}
-        nuevo["NumAsociado"]=input("Introduce el numero de Asociado:")
-        nuevo["NumCorrelativo_Pais"]=input("Introduce el codigo de tu Pais():")
-        nuevo["Nombre"]=input("Introduce el Nombre")
-        nuevo["Telefono"]=input("Introduce el Telefono:")
+        nuevo["NumAsociado"]=input("Introduce el numero de Asociado: ")
+        print()
+        nuevo["NumCorrelativo_Pais"]=input("Introduce el codigo de tu Pais(1-7): ")
+        print()
+        nuevo["Nombre"]=input("Introduce el Nombre: ")
+        print()
+        nuevo["Telefono"]=input("Introduce el Telefono: ")
+        print()
         nuevo["Direccion"]=input("Introduce la Direccion:")
         NuevoParticipante(db,nuevo)
-    elif opcion == 5:
+        print()
+    elif opcion == 7:
         borrar = input("Introduce el nombre de un pais: ")
         BorrarInformacion(db,borrar)
-    elif opcion == 6:
+        print()
+    elif opcion == 8:
         actualizar = input("Introduce un numero de asociado: ")
         ActualizarInformacion(db,actualizar)
-
-    
     opcion=MostrarMenu()
 Dexconexion_BD(db)
