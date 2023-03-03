@@ -47,6 +47,7 @@ CONSTRAINT NumAsociado_check CHECK (NumAsociado > 0),
 CONSTRAINT Codigo_Hotel_check_alojamiento CHECK (Codigo_Hotel > 0)
 );
 
+ALTER TABLE Participantes DROP CONSTRAINT Telefono;
 
 INSERT INTO Pais (NumCorrelativo_Pais,Nombre_Pais,NumClubs,NumParticipantes) VALUES (1, 'Marruecos', 9, 11);
 INSERT INTO Pais (NumCorrelativo_Pais,Nombre_Pais,NumClubs,NumParticipantes) VALUES (2, 'España', 15, 30);
@@ -64,30 +65,3 @@ INSERT INTO Participantes (NumAsociado,NumCorrelativo_Pais,Nombre,Telefono,Direc
 INSERT INTO Alojamiento (Fecha_Alojamiento,NumAsociado,Codigo_Hotel) VALUES ('2022-03-2', 3, 1);
 
 commit;
-
-
-Necesitamos saber los datos de los participantes según su país de origen, pide por teclado la inicial de un País y muestra el nombre y NumAsociado del participante, si hay varios paises indica el nombre del pais.
-
-Corrupción en el torneo, tras descubrise varios casos de corruptelas los jugadores eliminados afectados vuelven al torneo, Introducido el nombre de un participante por pantalla actualiza la fecha del Alojamiento del mismo.
-
-
-Para obtener la información de los participantes y cuántos países representan, podemos usar la cláusula GROUP BY para agrupar los participantes por país y contar el número de países diferentes representados. La consulta sería la siguiente:
-
-SELECT P.Nombre, COUNT(DISTINCT PA.NumCorrelativo_Pais) AS 'Paises Representados'
-FROM Participantes P
-INNER JOIN Pais PA ON P.NumCorrelativo_Pais = PA.NumCorrelativo_Pais
-GROUP BY P.Nombre;
-
-Para listar los participantes en la competición con toda su información, podemos usar la siguiente consulta:
-
-SELECT P.NumAsociado, P.Nombre, P.Telefono, P.Direccion, PA.Nombre_Pais, A.Fecha_Alojamiento, A.Codigo_Hotel
-FROM Participantes P
-INNER JOIN Pais PA ON P.NumCorrelativo_Pais = PA.NumCorrelativo_Pais
-LEFT JOIN Alojamiento A ON P.NumAsociado = A.NumAsociado
-ORDER BY PA.Nombre_Pais, P.Nombre;
-
-Para contar cuántos países están representados, podemos agregar la cláusula COUNT(DISTINCT) a la primera consulta:
-
-SELECT COUNT(DISTINCT PA.NumCorrelativo_Pais) AS 'Paises Representados'
-FROM Participantes P
-INNER JOIN Pais PA ON P.NumCorrelativo_Pais = PA.NumCorrelativo_Pais;
